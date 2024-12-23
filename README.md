@@ -15,10 +15,8 @@
   <a href="https://ece.hkust.edu.hk/pingtan">Ping Tan</a><sup>1*</sup>,
   <br>
   *Corresponding authors
-</p>
- 
- <p align="center">
-  <sup>1 </sup>HKUST
+  <br>
+    <sup>1 </sup>HKUST
   <sup>2 </sup>Bytedance Seed
   <sup>3 </sup>THU
 </p>
