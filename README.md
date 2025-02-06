@@ -47,4 +47,4 @@
   <img width="40%" src="assets/latent_length_xcube_.png"/>
 </p>
 A: We note that a compact latent space is crucial for the faster convergence of diffusion training, which leads to lower training difficulty and reduced computational resource requirements.
-Through a more careful evaluation, we find the XCube-VAE generates latent vectors of average $64,821$ dimension in our training data. Our VAE model allows a batchsize of 128 on an A100 GPU, while the XCube-VAE only archives a batchsize of 2 on the same GPU.
+Through a more careful evaluation, we find the XCube-VAE generates latent vectors of average 64,821 dimension in our training data. Our VAE model allows a batchsize of 128 on an A100 GPU, while the XCube-VAE only archives a batchsize of 2 on the same GPU.
