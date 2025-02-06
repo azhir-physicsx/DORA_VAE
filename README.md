@@ -32,3 +32,10 @@
 </p>
 
 <p align="center"> We are working on releasing the code 🏗️ 🚧 🔨</p>
+
+## ToDo
+
+- [ ] Release sharp edge sampling (very soon)
+- [ ] Release inference code.
+- [ ] Release Dora-bench.
+- [ ] Release training code.
