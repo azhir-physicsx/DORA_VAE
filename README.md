@@ -39,3 +39,10 @@
 - [ ] Release inference code.
 - [ ] Release Dora-bench.
 - [ ] Release training code.
+
+# FAQs
+
+***Q1***: *Why a compact or smaller latent space is important?*
+https://user-images.githubusercontent.com/caea0370-cd3e-485c-8c46-838696fbcb55
+A: We note that a compact latent space is crucial for the faster convergence of diffusion training, which leads to lower training difficulty and reduced computational resource requirements.
+Through a more careful evaluation, we find the XCube-VAE generates latent vectors of average $64,821$ dimension in our training data. Our VAE model allows a batchsize of 128 on an A100 GPU, while the XCube-VAE only archives a batchsize of 2 on the same GPU.
