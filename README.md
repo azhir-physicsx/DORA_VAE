@@ -35,7 +35,7 @@
 
 ## ToDo
 
-- [ ] Release sharp edge sampling (very soon)
+- [x] Release sharp edge sampling (2025.10.11)
 - [ ] Release inference code.
 - [ ] Release Dora-bench.
 - [ ] Release training code.
@@ -55,3 +55,8 @@ Through a more careful evaluation, we find the XCube-VAE generates latent vector
 A: In our earlier experiment, we designed a new efficient algorithm within the vecset-based architecture to render the normal map. The purpose was to compute the mean squared error (MSE) loss or GAN loss between the predicted normal and the ground-truth (GT) normal. Unfortunately, the experiment failed, and we observed that the results were even worse. For mse loss, here are the possible reasons for this failure. First, to render normals, we must initially predict an occupancy field. Subsequently, we apply a differentiable marching cube algorithm to this occupancy field to extract a mesh. Finally, a differentiable renderer such as nvdiffrast is employed to render the normals. However, both the mesh extraction and the rendering processes introduce errors. Moreover, during backpropagation, the gradient chain has to pass through the occupancy field. In the context of the optimization problem, using normals for supervision is essentially equivalent to using the occupancy for supervision. Since we already have the ground truth of the occupancy field, it raises the question of whether it is truly necessary to use normals, which involve a longer propagation chain, for supervision. 
 
 In addition to the above reasons, for the GAN loss, the normals rendered from the meshes reconstructed by the 3D VAE are absolutely clean. They are free of noise, have no background, show no high-frequency texture variations, and conform to physical constraints. This is different from the RGB images reconstructed by the 2D VAE, which contain some noise, cluttered backgrounds, and significant high-frequency variations. It's important to note that the experiment's failure might also be attributed to incorrect code or the presence of bugs. The above analysis is merely a post-hoc attempt to understand the outcome and does not guarantee a correct explanation.
+
+***Q3: What's the difference between point query and leanenable quary in the input of the VAE encoder?***
+
+A: According to the experiments conducted in 3DShape2VecSet, the performance of point query is better than that of learnable query. The model with point query as input has better generalization ability.
+The length of the point query is actually equivalent to that of the latent code, and it has a great property: it is more flexible compared to the learnable query. During inference, it can easily switch between lengths that were not seen during training without introducing additional parameters. In contrast, the model trained with learnable query cannot use lengths that were not encountered during training at test time, which limits its flexibility.
