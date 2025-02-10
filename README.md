@@ -60,3 +60,14 @@ In addition to the above reasons, for the GAN loss, the normals rendered from th
 
 A: According to the experiments conducted in 3DShape2VecSet, the performance of point query is better than that of learnable query. The model with point query as input has better generalization ability.
 The length of the point query is actually equivalent to that of the latent code, and it has a great property: it is more flexible compared to the learnable query. During inference, it can easily switch between lengths that were not seen during training without introducing additional parameters. In contrast, the model trained with learnable query cannot use lengths that were not encountered during training at test time, which limits its flexibility.
+
+## BibTex
+```
+@article{chen2024dora,
+      title={Dora: Sampling and Benchmarking for 3D Shape Variational Auto-Encoders}, 
+      author={Rui Chen and Jianfeng Zhang and Yixun Liang and Guan Luo and Weiyu Li and Jiarui Liu and Xiu Li and Xiaoxiao Long and Jiashi Feng and Ping Tan},
+      journal   = {arXiv preprint arXiv:2412.17808},
+      year      = {2024},
+}
+```
+

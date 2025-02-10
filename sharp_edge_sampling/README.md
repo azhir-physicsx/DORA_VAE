@@ -38,3 +38,11 @@ python sharp_sample.py  --json_file_path ./watertight_path.json  \
                         --sharp_point_path ./sharp_point_ply \
                         --sample_path ./sample
 ```
+
+## Acknowledgement
+
+- [cubvh](https://github.com/ashawkey/cubvh) provides a fast implementation to compute udf.
+- [pysdf](https://github.com/sxyu/sdf) provides a fast implementation to compute sdf.
+- [fpsample](https://github.com/leonardodalinky/fpsample) provides a fast implementation to compute fps
+- [diso](https://github.com/SarahWeiii/diso) provides a fast implementation to extract iso-surface.
+- [vscode-mesh-viewer](https://github.com/ashawkey/vscode-mesh-viewer) provides a plugin for previewing meshes in VSCode.
