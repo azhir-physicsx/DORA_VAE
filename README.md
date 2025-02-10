@@ -37,7 +37,7 @@
 
 - [x] Release sharp edge sampling (2025.2.11)
 - [ ] Release inference code.
-- [ ] Release Dora-bench.
+- [ ] Release Dora-bench 1.0 and Dora-bench 1.1.
 - [ ] Release training code.
 
 # FAQs
