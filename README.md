@@ -42,7 +42,7 @@
 
 # FAQs
 
-***Q1: Why a compact or smaller latent space is important?***:
+***Q1: Why a compact or smaller latent space is important?***
 <p align="center">
   <img width="40%" src="assets/latent_length_xcube_.png"/>
 </p>
