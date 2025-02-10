@@ -66,8 +66,8 @@ The length of the point query is actually equivalent to that of the latent code,
 @article{chen2024dora,
       title={Dora: Sampling and Benchmarking for 3D Shape Variational Auto-Encoders}, 
       author={Rui Chen and Jianfeng Zhang and Yixun Liang and Guan Luo and Weiyu Li and Jiarui Liu and Xiu Li and Xiaoxiao Long and Jiashi Feng and Ping Tan},
-      journal   = {arXiv preprint arXiv:2412.17808},
-      year      = {2024},
+      journal={arXiv preprint arXiv:2412.17808},
+      year={2024},
 }
 ```
 
