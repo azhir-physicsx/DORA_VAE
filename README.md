@@ -35,7 +35,7 @@
 
 ## ToDo
 
-- [x] Release sharp edge sampling (2025.10.11)
+- [x] Release sharp edge sampling (2025.2.11)
 - [ ] Release inference code.
 - [ ] Release Dora-bench.
 - [ ] Release training code.
