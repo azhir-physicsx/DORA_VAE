@@ -33,7 +33,7 @@ python detect_path.py   --directory_to_search ./remesh \
                         --json_file_path ./watertight_path.json \
                         --file_type .obj
 python sharp_sample.py  --json_file_path ./watertight_path.json  \
-                        --point_number 32768 \
+                        --point_number 65536 \
                         --angle_threshold 15 \
                         --sharp_point_path ./sharp_point_ply \
                         --sample_path ./sample
