@@ -61,6 +61,12 @@ In addition to the above reasons, for the GAN loss, the normals rendered from th
 A: According to the experiments conducted in 3DShape2VecSet, the performance of point query is better than that of learnable query. The model with point query as input has better generalization ability.
 The length of the point query is actually equivalent to that of the latent code, and we found that it has a great property: it is more flexible compared to the learnable query. During inference, it can easily switch between lengths that were not seen during training without introducing additional parameters. In contrast, the model trained with learnable query cannot use lengths that were not encountered during training at test time, which limits its flexibility.
 
+***Q4: Any interesting findings?***
+<p align="center">
+  <img width="40%" src="assets/attention_map.jpg"/>
+</p>
+A: We visualized the cross-attention map of the encoder and found that the query points (colored green) tend to pay more attention to the point clouds in their surrounding areas (where redder indicates more attention and blacker indicates less attention).
+
 ## BibTex
 ```
 @article{chen2024dora,
