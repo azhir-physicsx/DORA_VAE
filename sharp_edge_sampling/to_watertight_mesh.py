@@ -3,7 +3,7 @@ import cubvh
 import torch
 import numpy as np
 import trimesh
-from diso import DiffMC
+from diso import DiffMC, DiffDMC
 import argparse
 from tqdm import tqdm
 import os
@@ -42,9 +42,12 @@ def remesh(grid_xyz, grid_size, mesh_path, remesh_path, resolution):
     f = cubvh.cuBVH(torch.as_tensor(vertices, dtype=torch.float32, device='cuda'), torch.as_tensor(mesh.faces, dtype=torch.float32, device='cuda')) # build with numpy.ndarray/torch.Tensor
     grid_udf, _ ,_= f.unsigned_distance(grid_xyz, return_uvw=False) 
     grid_udf = grid_udf.view((grid_size[0], grid_size[1], grid_size[2]))
-    diffmc = DiffMC(dtype=torch.float32).cuda()
-    vertices, faces = diffmc(grid_udf, isovalue=eps)
-    vertices = vertices * 2 - 1
+    diffdmc = DiffDMC(dtype=torch.float32).cuda()
+    vertices, faces = diffdmc(grid_udf, isovalue=eps, normalize= False)
+    bbox_min = np.array((-1.05, -1.05, -1.05))
+    bbox_max= np.array((1.05, 1.05, 1.05))
+    bbox_size = bbox_max - bbox_min
+    vertices = (vertices + 1) / grid_size[0] * bbox_size[0] + bbox_min[0]
     mesh = trimesh.Trimesh(vertices=vertices.cpu().numpy(), faces=faces.cpu().numpy())
     # keep the max component of the extracted mesh
     components = mesh.split(only_watertight=False)
