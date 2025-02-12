@@ -36,8 +36,9 @@
 ## ToDo
 
 - [x] Release sharp edge sampling (2025.2.11)
-- [ ] Release inference code.
-- [ ] Release Dora-bench(256) and Dora-bench(512).
+- [x] Release Dora-bench(256) (2025.2.12) (https://huggingface.co/datasets/aruichen/Dora-bench-256/tree/main)
+- [ ] Release Dora-VAE.
+- [ ] Release Dora-bench(512).
 - [ ] Release training code.
 
 # FAQs
