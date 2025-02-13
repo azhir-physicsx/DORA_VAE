@@ -289,17 +289,17 @@ if __name__ == "__main__":
     parser.add_argument(
         "--angle_threshold",
         type= int,
-        help="指定要保存的sharp point目录",
+        help="指定二面角阈值",
     )
     parser.add_argument(
         "--point_number",
         type= int,
-        help="指定要保存的sharp point目录",
+        help="指定要采样的point数量",
     )
     parser.add_argument(
         "--sharp_point_path",
         type= str,
-        help="指定要保存的sharp point目录",
+        help="指定要保存的sharp point的目录",
     )
 
     parser.add_argument(

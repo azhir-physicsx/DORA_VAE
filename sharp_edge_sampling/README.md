@@ -17,7 +17,7 @@ pip install -r requirements.txt -i https://bytedpypi.byted.org/simple
 
 The data processing workflow consists of two steps. The first step is to convert non-watertight models into watertight ones. The second step is to perform sampling on the watertight models. For some reasons, we won't release the code for the first step for now. However, we've provided an alternative solution, and its effect won't differ much from what we actually used. If your model is already watertight, you can directly proceed to the second step. 
 
-**Step 1: Convert non-watertight models into watertight ones**
+**Step 1: (GPU) Convert non-watertight models into watertight ones**
 ```shell
 python detect_path.py   --directory_to_search ./Objaverse \
                         --json_file_path ./mesh_path.json  \
@@ -27,7 +27,7 @@ python to_watertight_mesh.py  --resolution 512 \
                               --remesh_target_path ./remesh
 ```
 
-**Step 2: Perform sharp edge sampling on the watertight models**
+**Step 2: (CPU-Only) Perform sharp edge sampling on the watertight models**
 ```shell
 python detect_path.py   --directory_to_search ./remesh \
                         --json_file_path ./watertight_path.json \

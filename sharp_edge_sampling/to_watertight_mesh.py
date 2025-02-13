@@ -61,7 +61,7 @@ def remesh(grid_xyz, grid_size, mesh_path, remesh_path, resolution):
     mesh.export(remesh_path)
 
 def main(resolution, json_file_path, remesh_target_path) -> None:
-    grid_xyz,grid_size = generate_dense_grid_points(resolution = 512)
+    grid_xyz,grid_size = generate_dense_grid_points(resolution = resolution)
     grid_xyz = torch.FloatTensor(grid_xyz).cuda()
     with open(json_file_path, 'r') as f:
         meshes_paths = json.load(f)
