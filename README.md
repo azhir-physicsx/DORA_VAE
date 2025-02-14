@@ -69,14 +69,9 @@ The length of the point query is actually equivalent to that of the latent code,
 A: We visualized the cross-attention map of the encoder and found that the query points (colored green) tend to pay more attention to the point clouds in their surrounding areas (where redder indicates more attention and blacker indicates less attention).
 
 ***Q5: Can Dora-VAE handle the thin shell data?***
-<div style="text-align: center;">
-  <div style="display: inline-block; width: 40%; margin-right: 1%;">
-    <img width="50%" src="assets/thin1.png"/>
-  </div>
-  <div style="display: inline-block; width: 40%;">
-    <img width="50%" src="assets/thin2.png"/>
-  </div>
-</div>
+<p align="center">
+  <img width="40%" src="assets/thin.jpg"/>
+</p>
 A: Yes. Dora-VAE can reconstuct the thin shell data with high quality. The two examples in the above figure show a slice of the thin-shell data reconstructed by Dora-VAE, where white represents the interior and black represents the exterior.
 
 ## BibTex
