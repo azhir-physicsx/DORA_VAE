@@ -72,7 +72,7 @@ A: We visualized the cross-attention map of the encoder and found that the query
 <p align="center">
   <img width="40%" src="assets/thin.jpg"/>
 </p>
-A: Yes. Dora-VAE can reconstuct the thin shell data with high quality. The two examples in the above figure show a slice of the thin-shell data reconstructed by Dora-VAE, where white represents the interior and black represents the exterior.
+A: Yes. Dora-VAE can reconstruct the thin shell data with high quality. The two examples in the above figure show a slice of the thin-shell data reconstructed by Dora-VAE, where white represents the interior and black represents the exterior.
 
 ## BibTex
 ```
