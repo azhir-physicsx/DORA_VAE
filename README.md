@@ -75,6 +75,7 @@ A: We visualized the cross-attention map of the encoder and found that the query
 A: Yes. Dora-VAE can reconstruct the thin shell data with high quality. The two examples in the above figure show a slice of the thin-shell data reconstructed by Dora-VAE, where white represents the interior and black represents the exterior.
 
 ***Q6: 2D VAEs typically require several billion data for training. However, due to the shortage of 3D data, 3D VAEs are usually trained with less than one million data. Does it have good generalization performance?***
+
 A: At first, we also had this question. But after improving and training the 3D VAE based on the vecset-based architecture proposed by 3DShape2VecSet, we were pleasantly surprised to find that it's really powerful, which had also been verified by CLAY. In fact, it only needs about 400K data to have good generalization ability. We hypothesize that the distribution of 3D geometry is simpler than that of RGB images. This is because, unlike RGB images, 3D geometry doesn't have many high-frequency texture variations or cluttered backgrounds.
 
 
