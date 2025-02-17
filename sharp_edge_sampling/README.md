@@ -10,7 +10,7 @@ conda activate Dora
 pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
 pip install git+https://github.com/ashawkey/cubvh
 pip install diso 
-pip install -r requirements.txt -i https://bytedpypi.byted.org/simple
+pip install -r requirements.txt
 ```
 
 **Overview**
