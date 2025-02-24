@@ -37,11 +37,22 @@
 
 - [x] Release sharp edge sampling (2025.2.11)
 - [x] Release Dora-bench(256) (2025.2.12) (https://huggingface.co/datasets/aruichen/Dora-bench-256/tree/main)
-- [ ] Release Dora-VAE.
+- [ ] Release Dora-VAE v1.1, including inference and training codes with model weight (2025.2.24)
 - [ ] Release Dora-bench(512).
-- [ ] Release training code.
+- [ ] Release Dora-VAE v1.2.
 
-# FAQs
+## Dora-VAE
+| Version |  training token length -> probability                              | eps     | number of input points (uniform + salient) |
+|---------|--------------------------------------------------------------------|---------|---------|
+| v1.0    | [256,1280] -> [0.5,0.5]                                            | 2/256   | 16384 + 16384 |
+| v1.1    | [256,512,768,1024,1280,2048,4096] -> [0.1,0.1,0.1,0.1,0.1,0.3,0.2] | 2/256   | 32768 + 32768 |
+| v1.2    | [256,512,768,1024,1280,2048,4096] -> [0.1,0.1,0.1,0.1,0.1,0.3,0.2] | 2/512   | 32768 + 32768 |
+<p align="center">
+  <img width="40%" src="assets/eps.jpg"/>
+</p>
+During the data preprocessing stage, when converting a non-watertight mesh into a watertight mesh, the new surface will expand by a length of ε (eps) compared to the original surface. The smaller this length is, the closer the new surface is to the original surface, but it will also result in thinner structures. Learning thinner structures is more challenging for the network. Dora-VAE 1.1 was trained on data processed with eps = 2/256 and can generalize well. However, when inferring with thinner structures, such as eps = 2/512, the reconstructed surface may have holes. To solve this problem, Dora-VAE 1.2 is trained on data processed with eps = 2/512 and can reconstruct a more refined surface.
+
+## FAQs
 
 ***Q1: Why a compact or smaller latent space is important?***
 <p align="center">
