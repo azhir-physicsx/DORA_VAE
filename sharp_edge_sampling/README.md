@@ -22,6 +22,15 @@ The data processing workflow consists of two steps. The first step is to convert
 python detect_path.py   --directory_to_search ./Objaverse \
                         --json_file_path ./mesh_path.json  \
                         --file_type .glb
+```
+Use the following comment for Dora-VAE v1.1
+```shell
+python to_watertight_mesh.py  --resolution 256 \
+                              --json_file_path ./mesh_path.json \
+                              --remesh_target_path ./remesh
+```
+Use the following comment for Dora-VAE v1.2 or for finetuning Dora-VAE v1.1.
+```shell
 python to_watertight_mesh.py  --resolution 512 \
                               --json_file_path ./mesh_path.json \
                               --remesh_target_path ./remesh

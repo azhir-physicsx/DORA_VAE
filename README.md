@@ -31,13 +31,12 @@
     <a href="https://youtu.be/6evNqk0b-bQ"><img alt="youtube views" title="Subscribe to my YouTube channel" src="https://img.shields.io/youtube/views/6evNqk0b-bQ?logo=youtube&labelColor=ce4630&style=for-the-badge"/></a>
 </p>
 
-<p align="center"> We are working on releasing the code 🏗️ 🚧 🔨</p>
 
 ## ToDo
 
 - [x] Release sharp edge sampling (2025.2.11)
 - [x] Release Dora-bench(256) (2025.2.12) (https://huggingface.co/datasets/aruichen/Dora-bench-256/tree/main)
-- [ ] Release Dora-VAE v1.1, including inference and training codes with model weight (2025.2.24)
+- [x] Release Dora-VAE v1.1, including inference and training codes with model weight (2025.2.24)
 - [ ] Release Dora-bench(512).
 - [ ] Release Dora-VAE v1.2.
 
