@@ -22,13 +22,11 @@ import pytorch_lightning as pl
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
-from torchvision import transforms
 from craftsman import register
 from craftsman.utils.base import Updateable
 from craftsman.utils.config import parse_structured
 from craftsman.utils.typing import *
 
-import fpsample
 
 
 def random_rotation_matrix():
