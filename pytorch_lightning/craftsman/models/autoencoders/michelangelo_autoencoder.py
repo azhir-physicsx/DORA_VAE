@@ -133,14 +133,14 @@ class PerceiverCrossAttentionEncoder(nn.Module):
             batch = torch.repeat_interleave(batch, N_coarse) 
             pos = flattened
             idx = fps(pos, batch, ratio=ratio_coarse)  
-            query_coarse = coarse_data.view(bs*N_coarse, -1)[idx].view(bs, -1, coarse_data.shape[-1]) # 103,256,768
+            query_coarse = coarse_data.view(bs*N_coarse, -1)[idx].view(bs, -1, coarse_data.shape[-1]) 
 
             flattened = sharp_pc.view(bs*N_sharp, D_sharp) 
             batch = torch.arange(bs).to(sharp_pc.device) 
             batch = torch.repeat_interleave(batch, N_sharp) 
             pos = flattened
             idx = fps(pos, batch, ratio=ratio_sharp) 
-            query_sharp = sharp_data.view(bs*N_sharp, -1)[idx].view(bs, -1, sharp_data.shape[-1]) # 103,256,768
+            query_sharp = sharp_data.view(bs*N_sharp, -1)[idx].view(bs, -1, sharp_data.shape[-1]) 
 
             query = torch.cat([query_coarse, query_sharp], dim=1)
             print('query shape',f'{query.shape}')
