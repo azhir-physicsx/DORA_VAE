@@ -89,6 +89,11 @@ A: Yes. Dora-VAE can reconstruct the thin shell data with high quality. The two 
 
 A: At first, we also had this question. But after improving and training the 3D VAE based on the vecset-based architecture proposed by 3DShape2VecSet, we were pleasantly surprised to find that it's really powerful, which had also been verified by CLAY. In fact, it only needs about 400K data to have good generalization ability. We hypothesize that the distribution of 3D geometry is simpler than that of RGB images. This is because, unlike RGB images, 3D geometry doesn't have many high-frequency texture variations or cluttered backgrounds.
 
+## Acknowledgement
+- [3DShape2VecSet](https://arxiv.org/abs/2301.11445) is the foundation of our work, which proposes the vecset-based representation and the manner of the point query in the input of the VAE.
+- [CLAY](https://arxiv.org/abs/2406.13897) verifies the scalability of the vecset-based representation and proposes the controllable generative model for Creating High-quality 3D Assets.
+- [CraftsMan](https://arxiv.org/abs/2405.14979) provides a PyTorch Lightning framework similar to threestudio, which facilitates native 3D training. Our code is largely based on the repository of CraftsMan.
+- [Michelangelo.](https://github.com/NeuralCarver/Michelangelo) We follow Michelangelo's design of 8-layer encoder and 16-layer decoder.
 
 ## BibTex
 ```
