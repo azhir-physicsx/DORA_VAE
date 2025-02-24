@@ -15,7 +15,7 @@ pip install -r requirements.txt
 
 **Overview**
 
-The data processing workflow consists of two steps. The first step is to convert non-watertight models into watertight ones. The second step is to perform sampling on the watertight models. For some reasons, we won't release the code for the first step for now. However, we've provided an alternative solution, and its effect won't differ much from what we actually used. If your model is already watertight, you can directly proceed to the second step. 
+The data processing workflow consists of two steps. The first step is to convert non-watertight models into watertight ones. The second step is to perform sampling on the watertight models. For some reasons, we won't release the code for the first step for now. However, we've provided an alternative solution, and its effect won't differ much from what we actually used. If your model is already watertight, you can directly proceed to the second step. Note that the .obj files in Dora-bench have already been converted into watertight models.
 
 **Step 1: (GPU) Convert non-watertight models into watertight ones**
 ```shell
