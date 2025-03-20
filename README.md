@@ -31,6 +31,7 @@
     <a href="https://youtu.be/6evNqk0b-bQ"><img alt="youtube views" title="Subscribe to my YouTube channel" src="https://img.shields.io/youtube/views/6evNqk0b-bQ?logo=youtube&labelColor=ce4630&style=for-the-badge"/></a>
 </p>
 
+<p style="color:red;">Note: We have recently found that Dora-VAE can specify tokens of any length during inference, even if this length has not been seen during training. The more tokens are used, the better the reconstruction effect will be.</p>
 
 ## ToDo
 
