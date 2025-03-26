@@ -53,16 +53,16 @@ Note: We have recently found that Dora-VAE can specify tokens of any length duri
 During the data preprocessing stage, when converting a non-watertight mesh into a watertight mesh, the new surface will expand by a length of ε (eps) compared to the original surface. The smaller this length is, the closer the new surface is to the original surface. However, in some complex cases, it may result in thinner structures. It is more challenging for the network to learn these thinner structures.. Dora-VAE 1.1 was trained on data processed with eps = 2/256 and can generalize well. However, when inferring with thinner structures, such as eps = 2/512, the reconstructed surface may have holes. To solve this problem, Dora-VAE 1.2 is trained on data processed with eps = 2/512 and can reconstruct a more refined surface.
 
 
-<details> <summary> Tips on training diffusion model</summary>
+## Tips on training diffusion model
 
 - Progressive training is crucial for the faster convergence of diffusion model. Warming up with tokens of length 256 and then gradually increasing the length of the tokens during training can significantly accelerate the convergence speed compared to directly training with a large token length.
 
 - During training, avoid adding positional encoding to the latent space as it harms convergence, since the VAE's latent codes from point query inputs are unordered.
 
 - During training, bf16-mixed is more stable than fp16-mixed precision.
-</details>
 
-<details> <summary> FAQs</summary>
+
+## FAQs
 
 ***Q1: Why a compact or smaller latent space is important?***
 <p align="center">
@@ -98,7 +98,7 @@ A: Yes. Dora-VAE can reconstruct the thin shell data with high quality. The two 
 ***Q6: 2D VAEs typically require several billion data for training. However, due to the shortage of 3D data, 3D VAEs are usually trained with less than one million data. Does it have good generalization performance?***
 
 A: At first, we also had this question. But after improving and training the 3D VAE based on the vecset-based architecture proposed by 3DShape2VecSet, we were pleasantly surprised to find that it's really powerful, which had also been verified by CLAY. In fact, it only needs about 400K data to have good generalization ability. We hypothesize that the distribution of 3D geometry is simpler than that of RGB images. This is because, unlike RGB images, 3D geometry doesn't have many high-frequency texture variations or cluttered backgrounds.
-</details>
+
 
 ## Acknowledgement
 - [3DShape2VecSet](https://arxiv.org/abs/2301.11445) is the foundation of our work, which proposes the vecset-based representation and the manner of the point query in the input of the VAE.
