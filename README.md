@@ -41,7 +41,7 @@ Note: We have recently found that Dora-VAE can specify tokens of any length duri
 - [ ] Release Dora-bench(512).
 - [ ] Release Dora-VAE v1.2.
 
-<details> <summary> Dora-VAE</summary>
+## Dora-VAE
 | Version |  training token length -> probability                              | eps     | number of input points (uniform + salient) | output |
 |---------|--------------------------------------------------------------------|---------|---------|---------|
 | v1.0    | [256,1280] -> [0.5,0.5]                                            | 2/256   | 16384 + 16384 |occupancy|
@@ -51,11 +51,14 @@ Note: We have recently found that Dora-VAE can specify tokens of any length duri
   <img width="40%" src="assets/eps.jpg"/>
 </p>
 During the data preprocessing stage, when converting a non-watertight mesh into a watertight mesh, the new surface will expand by a length of ε (eps) compared to the original surface. The smaller this length is, the closer the new surface is to the original surface. However, in some complex cases, it may result in thinner structures. It is more challenging for the network to learn these thinner structures.. Dora-VAE 1.1 was trained on data processed with eps = 2/256 and can generalize well. However, when inferring with thinner structures, such as eps = 2/512, the reconstructed surface may have holes. To solve this problem, Dora-VAE 1.2 is trained on data processed with eps = 2/512 and can reconstruct a more refined surface.
-</details>
+
 
 <details> <summary> Tips on training diffusion model</summary>
+
 - Progressive training is crucial for the faster convergence of diffusion model. Warming up with tokens of length 256 and then gradually increasing the length of the tokens during training can significantly accelerate the convergence speed compared to directly training with a large token length.
+
 - During training, avoid adding positional encoding to the latent space as it harms convergence, since the VAE's latent codes from point query inputs are unordered.
+
 - During training, bf16-mixed is more stable than fp16-mixed precision.
 </details>
 
