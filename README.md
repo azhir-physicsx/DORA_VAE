@@ -38,7 +38,7 @@ Note: We have recently found that Dora-VAE can specify tokens of any length duri
 - [x] Release sharp edge sampling (2025.2.11)
 - [x] Release Dora-bench(256) (2025.2.12) (https://huggingface.co/datasets/aruichen/Dora-bench-256/tree/main)
 - [x] Release Dora-VAE v1.1, including inference and training codes with model weight (2025.2.24)
-- [x] Upload 240 image-to-3d results on the project page (2025.3.27)
+- [x] Upload 240 image-to-3d results from the project page, including 240 images and their corresponding generated 3D models.(2025.3.27)
    (https://huggingface.co/datasets/aruichen/Dora-diffusion-results/tree/main)
 - [ ] Release Dora-bench(512).
 - [ ] Release Dora-VAE v1.2.
