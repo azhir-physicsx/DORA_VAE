@@ -133,7 +133,9 @@ class ShapeAutoEncoderSystem(BaseSystem):
         device = batch['coarse_surface'].device
         out = self(batch,'val')
         try:
-            mesh_v_f, has_surface = self.shape_model.extract_geometry_by_diffdmc(out["latents"],octree_depth=9)
+            save_slice_dir =  self.get_save_path(f"it{self.true_global_step}/{os.path.basename(batch['uid'][0])}.replace(".npz","")") # turn on
+            # save_slice_dir = ''  # turn off
+            mesh_v_f, has_surface = self.shape_model.extract_geometry_by_diffdmc(out["latents"],octree_depth=9, save_slice_dir=save_slice_dir)
             file_path = f"it{self.true_global_step}/{os.path.basename(batch['uid'][0])}".replace(".npz",".obj")
             if not os.path.exists(file_path):
                 self.save_mesh(
@@ -198,19 +200,20 @@ class ShapeAutoEncoderSystem(BaseSystem):
         self.log(f"val/mean_value", mean_value,sync_dist=True, on_epoch=True)
         self.log(f"val/variance_value", variance_value,sync_dist=True, on_epoch=True)
 
-       
 
-        self.log(f"val_{batch['uid'][0]}/overall_accuracy", overall_accuracy, on_epoch=True)
-        self.log(f"val_{batch['uid'][0]}/overall_iou",overall_iou, on_epoch=True)
+        uid = os.path.basename(batch['uid'][0]).replace(".npz","")
 
-        self.log(f"val_{batch['uid'][0]}/coarse_accuracy", coarse_accuracy, on_epoch=True)
-        self.log(f"val_{batch['uid'][0]}/coarse_iou", coarse_iou, on_epoch=True)
+        self.log(f"val_{uid}/overall_accuracy", overall_accuracy, on_epoch=True)
+        self.log(f"val_{uid}/overall_iou",overall_iou, on_epoch=True)
 
-        self.log(f"val_{batch['uid'][0]}/sharp_accuracy", sharp_accuracy, on_epoch=True)
-        self.log(f"val_{batch['uid'][0]}/sharp_iou", sharp_iou, on_epoch=True)
+        self.log(f"val_{uid}/coarse_accuracy", coarse_accuracy, on_epoch=True)
+        self.log(f"val_{uid}/coarse_iou", coarse_iou, on_epoch=True)
 
-        self.log(f"val_{batch['uid'][0]}/mean_value", mean_value, on_epoch=True)
-        self.log(f"val_{batch['uid'][0]}/variance_value", variance_value, on_epoch=True)
+        self.log(f"val_{uid}/sharp_accuracy", sharp_accuracy, on_epoch=True)
+        self.log(f"val_{uid}/sharp_iou", sharp_iou, on_epoch=True)
+
+        self.log(f"val_{uid}/mean_value", mean_value, on_epoch=True)
+        self.log(f"val_{uid}/variance_value", variance_value, on_epoch=True)
 
         torch.cuda.empty_cache()
         return {"val/loss": out["loss_sharp_logits"]}
@@ -221,7 +224,9 @@ class ShapeAutoEncoderSystem(BaseSystem):
         device = batch['coarse_surface'].device
         out = self(batch,'val')
         try:
-            mesh_v_f, has_surface = self.shape_model.extract_geometry_by_diffdmc(out["latents"],octree_depth=9)
+            save_slice_dir =  self.get_save_path(f"it{self.true_global_step}/{os.path.basename(batch['uid'][0])}.replace(".npz","")") # turn on
+            # save_slice_dir = ''  # turn off
+            mesh_v_f, has_surface = self.shape_model.extract_geometry_by_diffdmc(out["latents"],octree_depth=9, save_slice_dir=save_slice_dir)
             file_path = f"it{self.true_global_step}/{os.path.basename(batch['uid'][0])}".replace(".npz",".obj")
             if not os.path.exists(file_path):
                 self.save_mesh(
@@ -284,17 +289,19 @@ class ShapeAutoEncoderSystem(BaseSystem):
         self.log(f"val/mean_value", mean_value,sync_dist=True, on_epoch=True)
         self.log(f"val/variance_value", variance_value,sync_dist=True, on_epoch=True)
 
-        self.log(f"val_{batch['uid'][0]}/overall_accuracy", overall_accuracy, on_epoch=True)
-        self.log(f"val_{batch['uid'][0]}/overall_iou",overall_iou, on_epoch=True)
+        uid = os.path.basename(batch['uid'][0]).replace(".npz","")
 
-        self.log(f"val_{batch['uid'][0]}/coarse_accuracy", coarse_accuracy, on_epoch=True)
-        self.log(f"val_{batch['uid'][0]}/coarse_iou", coarse_iou, on_epoch=True)
+        self.log(f"val_{uid}/overall_accuracy", overall_accuracy, on_epoch=True)
+        self.log(f"val_{uid}/overall_iou",overall_iou, on_epoch=True)
 
-        self.log(f"val_{batch['uid'][0]}/sharp_accuracy", sharp_accuracy, on_epoch=True)
-        self.log(f"val_{batch['uid'][0]}/sharp_iou", sharp_iou, on_epoch=True)
+        self.log(f"val_{uid}/coarse_accuracy", coarse_accuracy, on_epoch=True)
+        self.log(f"val_{uid}/coarse_iou", coarse_iou, on_epoch=True)
 
-        self.log(f"val_{batch['uid'][0]}/mean_value", mean_value, on_epoch=True)
-        self.log(f"val_{batch['uid'][0]}/variance_value", variance_value, on_epoch=True)
+        self.log(f"val_{uid}/sharp_accuracy", sharp_accuracy, on_epoch=True)
+        self.log(f"val_{uid}/sharp_iou", sharp_iou, on_epoch=True)
+
+        self.log(f"val_{uid}/mean_value", mean_value, on_epoch=True)
+        self.log(f"val_{uid}/variance_value", variance_value, on_epoch=True)
 
         torch.cuda.empty_cache()
         return {"val/loss": out["loss_sharp_logits"]}

@@ -266,6 +266,7 @@ class AutoEncoder(BaseModule):
                          bounds: Union[Tuple[float], List[float], float] = (-1.05, -1.05, -1.05, 1.05, 1.05, 1.05),
                          octree_depth: int = 8,
                          num_chunks: int = 10000,
+                         save_slice_dir: str = ''
                          ):
         
         if isinstance(bounds, float):
@@ -292,6 +293,34 @@ class AutoEncoder(BaseModule):
             logits = self.query(batch_queries, latents)
             batch_logits.append(logits)
         grid_logits = torch.cat(batch_logits, dim=1).view((batch_size, grid_size[0], grid_size[1], grid_size[2])).float()
+
+        if save_slice_dir !='':
+            slice_grid = grid_logits[0,(grid_size[0]-1)//2] # -1 ~1 
+            color_values = np.where(slice_grid > 0, 1, 0)
+            # color_values = (slice_grid+1)/2
+            y_coords = np.arange(0, grid_size[0]-1, 1)
+            z_coords = np.arange(0, grid_size[0]-1, 1)
+            y_grid, z_grid = np.meshgrid(y_coords,z_coords) # 27，27
+            color_values = color_values[y_grid,z_grid].T
+            plt.scatter(y_grid, z_grid, s=1, c=color_values, cmap='gray', marker='o')
+            plt.gca().set_facecolor((0.6, 0.6, 0.6))
+            plt.axis([0, grid_size[0], 0, grid_size[0]])
+
+
+            for x in range(0, grid_size[0]-1, 1):
+                for y in range(0, grid_size[0]-1, 1):
+                    a = Point(x, y)
+                    b = Point(x + RES, y)
+                    c = Point(x + RES, y - RES)
+                    d = Point(x, y - RES)
+                    draw_seperator_line(a, b, c, d, slice_grid.T)
+            plt.gca().invert_xaxis()    # invert x-axis
+            # plt.gca().invert_yaxis()  # invert y-axis
+            # plt.xticks(rotation=-90)
+            # plt.gca().invert_xaxis()
+            # plt.gca().invert_yaxis()
+            plt.savefig(save_slice_dir+ '.png')
+            plt.close()
 
         mesh_v_f = []
         has_surface = np.zeros((batch_size,), dtype=np.bool_)
