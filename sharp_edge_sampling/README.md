@@ -13,11 +13,15 @@ pip install diso
 pip install -r requirements.txt
 ```
 
-**Overview**
+## Overview
 
-The data processing workflow consists of two steps. The first step is to convert non-watertight models into watertight ones. The second step is to perform sampling on the watertight models. For some reasons, we won't release the code for the first step for now. However, we've provided an alternative solution, and its effect won't differ much from what we actually used. If your model is already watertight, you can directly proceed to the second step. Note that the .obj files in Dora-bench have already been converted into watertight models.
+The data processing workflow consists of two steps. 
 
-**Step 1: (GPU) Convert non-watertight models into watertight ones**
+Step 1 is to convert non-watertight models into watertight ones normalized to (-1, 1). We provide an alternative solution for step 1, and its effect won't differ much from what we actually used. If your model is already watertight, you can directly proceed to the second step. Note that the .obj files in Dora-bench have already been converted into watertight models normalized to (-1, 1).
+
+Step 2 is to perform sharp edge sampling on the watertight models. 
+
+## Step 1: (GPU) Convert non-watertight models into watertight ones
 ```shell
 python detect_path.py   --directory_to_search ./Objaverse \
                         --json_file_path ./mesh_path.json  \
@@ -36,7 +40,8 @@ python to_watertight_mesh.py  --resolution 512 \
                               --remesh_target_path ./remesh
 ```
 
-**Step 2: (CPU-Only) Perform sharp edge sampling on the watertight models**
+## Step 2: (CPU-Only) Perform sharp edge sampling on the watertight models
+If your 3D asset is made watertight via your own approach and you've skipped our Step 1, ensure the vertex coordinates of your OBJ file are normalized to (-1, 1). Values either below or above this range may reduce VAE reconstruction accuracy.
 ```shell
 python detect_path.py   --directory_to_search ./remesh \
                         --json_file_path ./watertight_path.json \
@@ -47,7 +52,7 @@ python sharp_sample.py  --json_file_path ./watertight_path.json  \
                         --sharp_point_path ./sharp_point_ply \
                         --sample_path ./sample
 ```
-
+Our VAE model, trained solely on watertight data, may underperform on non-watertight data. Two reasons: non-manifold edges may lack two faces, nullifying the sharp-edge detection via dihedral angles and preventing salient-point sampling; the VAE encoder needs points and normals, but non-watertight data normals often have problems like flipping. If you want to improve the reconstruction performance of Dora-VAE for non-watertight data, you can make appropriate modifications to the algorithm based on the above analysis and then perform fine-tuning using the VAE training code we provided.
 ## Acknowledgement
 
 - [cubvh](https://github.com/ashawkey/cubvh) provides a fast implementation to compute udf.
