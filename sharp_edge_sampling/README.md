@@ -52,7 +52,7 @@ python sharp_sample.py  --json_file_path ./watertight_path.json  \
                         --sharp_point_path ./sharp_point_ply \
                         --sample_path ./sample
 ```
-Our VAE model, trained solely on watertight data, may underperform on non-watertight data. Two reasons: non-manifold edges may lack two faces, nullifying the sharp-edge detection via dihedral angles and preventing salient-point sampling; the VAE encoder needs points and normals, but non-watertight data normals often have problems like flipping. If you want to improve the reconstruction performance of Dora-VAE for non-watertight data, you can make appropriate modifications to the algorithm based on the above analysis and then perform fine-tuning using the VAE training code we provided.
+Our VAE model, trained solely on watertight data normalized to (-1, 1), may underperform on non-watertight data. Two reasons: non-manifold edges may lack two faces, nullifying the sharp-edge detection via dihedral angles and preventing salient-point sampling; the VAE encoder needs points and normals, but non-watertight data normals often have problems like flipping. If you want to improve the reconstruction performance of Dora-VAE for non-watertight data, you can make appropriate modifications to the algorithm based on the above analysis and then perform fine-tuning using the VAE training code we provided.
 ## Acknowledgement
 
 - [cubvh](https://github.com/ashawkey/cubvh) provides a fast implementation to compute udf.
