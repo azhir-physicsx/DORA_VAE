@@ -11,7 +11,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-# code builder: Dora team (https://github.com/Seed3D/Dora)
+#  code builder: Dora team (https://github.com/Seed3D/Dora)
 import cubvh
 import torch
 import numpy as np
@@ -21,6 +21,7 @@ import argparse
 from tqdm import tqdm
 import os
 import json
+import point_cloud_utils as pcu
 def generate_dense_grid_points(
     bbox_min = np.array((-1.05, -1.05, -1.05)),#array([-1.05, -1.05, -1.05])
     bbox_max= np.array((1.05, 1.05, 1.05)),#array([1.05, 1.05, 1.05])
@@ -40,7 +41,7 @@ def generate_dense_grid_points(
     return xyz, grid_size
 
 
-def remesh(grid_xyz, grid_size, mesh_path, remesh_path, resolution):
+def remesh(grid_xyz, grid_size, mesh_path, remesh_path, resolution, use_pcu):
     eps = 2 / resolution
     mesh = trimesh.load(mesh_path, force='mesh')
 
@@ -51,10 +52,13 @@ def remesh(grid_xyz, grid_size, mesh_path, remesh_path, resolution):
     center = (bbmin + bbmax) / 2
     scale = 2.0 / (bbmax - bbmin).max()
     vertices = (vertices - center) * scale
-
-    f = cubvh.cuBVH(torch.as_tensor(vertices, dtype=torch.float32, device='cuda'), torch.as_tensor(mesh.faces, dtype=torch.float32, device='cuda')) # build with numpy.ndarray/torch.Tensor
-    grid_udf, _ ,_= f.unsigned_distance(grid_xyz, return_uvw=False) 
-    grid_udf = grid_udf.view((grid_size[0], grid_size[1], grid_size[2]))
+    if use_pcu:
+        grid_sdf, fid, bc = pcu.signed_distance_to_mesh(grid_xyz, vertices.astype(np.float32), mesh.faces)
+        grid_udf = torch.FloatTensor(np.abs(grid_sdf)).cuda().view((grid_size[0], grid_size[1], grid_size[2]))
+    else:
+        f = cubvh.cuBVH(torch.as_tensor(vertices, dtype=torch.float32, device='cuda'), torch.as_tensor(mesh.faces, dtype=torch.float32, device='cuda')) # build with numpy.ndarray/torch.Tensor
+        grid_udf, _,_= f.unsigned_distance(grid_xyz, return_uvw=False)
+        grid_udf = grid_udf.view((grid_size[0], grid_size[1], grid_size[2]))
     diffdmc = DiffDMC(dtype=torch.float32).cuda()
     vertices, faces = diffdmc(grid_udf, isovalue=eps, normalize= False)
     bbox_min = np.array((-1.05, -1.05, -1.05))
@@ -73,9 +77,12 @@ def remesh(grid_xyz, grid_size, mesh_path, remesh_path, resolution):
     mesh = components[max_component]
     mesh.export(remesh_path)
 
-def main(resolution, json_file_path, remesh_target_path) -> None:
+def main(resolution, json_file_path, remesh_target_path, use_pcu) -> None:
     grid_xyz,grid_size = generate_dense_grid_points(resolution = resolution)
-    grid_xyz = torch.FloatTensor(grid_xyz).cuda()
+    if use_pcu:
+        grid_xyz = grid_xyz.astype(np.float32)
+    else:
+        grid_xyz = torch.FloatTensor(grid_xyz).cuda()
     with open(json_file_path, 'r') as f:
         meshes_paths = json.load(f)
     for mesh_path in tqdm(meshes_paths, desc="Processing meshes"):
@@ -86,9 +93,11 @@ def main(resolution, json_file_path, remesh_target_path) -> None:
         print('process: '+remesh_path)
         if os.path.exists(remesh_path)==False:
             try:
-                remesh(grid_xyz, grid_size, mesh_path, remesh_path, resolution)
+                remesh(grid_xyz, grid_size, mesh_path, remesh_path, resolution, use_pcu)
+                torch.cuda.empty_cache()
             except Exception as e:
                 print(f"ERROR: in processing path: {remesh_path}. Error: {e}")
+                torch.cuda.empty_cache()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -101,13 +110,22 @@ if __name__ == "__main__":
     parser.add_argument(
         "--json_file_path",
         type= str,
-        help="指定要遍历的json文件",
+        help="Specify the JSON file to be traversed.",
     )
     parser.add_argument(
         "--remesh_target_path",
         type= str,
-        help="指定要保存的的remesh目录",
+        help="Specify the remesh directory to be saved.",
+    )
+    parser.add_argument(
+        "--use_pcu",
+        action='store_true',
+        help="If set to False, use cubvh (GPU-required). \
+            It's fast for meshes with a moderate number of faces \
+            but becomes extremely slow or causes GPU memory leakage for large number of faces. \
+            If set to True, use pcu (CPU-based).\
+            It's generally slower than cubvh but avoids GPU leakage overflow issues.",
     )
     args, extras = parser.parse_known_args()
-    main(args.resolution, args.json_file_path, args.remesh_target_path)
+    main(args.resolution, args.json_file_path, args.remesh_target_path, args.use_pcu)
 
