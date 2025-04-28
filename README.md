@@ -31,8 +31,8 @@
     <a href="https://youtu.be/6evNqk0b-bQ"><img alt="youtube views" title="Subscribe to my YouTube channel" src="https://img.shields.io/youtube/views/6evNqk0b-bQ?logo=youtube&labelColor=ce4630&style=for-the-badge"/></a>
 </p>
 
-Note: We have recently found that Dora-VAE can specify tokens of any length during inference, even if this length has not been seen during training. The more tokens are used, the better the reconstruction effect will be. 
-
+Note: We have recently found that Dora-VAE can specify tokens of any length during inference, even if this length has not been seen during training. The more tokens are utilized, the better the reconstruction effect will be. This indicates that the decoder of Dora exhibits inference-time scalability, a capability that might be lacking in current VAEs based on volume representation.
+ 
 When conducting a comparison of the reconstruction performance with Dora-VAE, to ensure fairness, it would be highly appreciated if you could report the length of the latent code being used. This reported length is not just a numerical value; it represents the compression ratio of the VAE, which is a crucial factor that should not be overlooked during the evaluation of reconstruction capabilities. The compression ratio, in turn, has a direct bearing on the convergence speed, effectiveness, and cost of downstream diffusion training.
 ## ToDo
 
