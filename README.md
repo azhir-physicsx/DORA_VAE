@@ -108,11 +108,13 @@ A: At first, we also had this question. But after improving and training the 3D 
 
 ## BibTex
 ```
-@article{chen2024dora,
-      title={Dora: Sampling and Benchmarking for 3D Shape Variational Auto-Encoders}, 
-      author={Rui Chen and Jianfeng Zhang and Yixun Liang and Guan Luo and Weiyu Li and Jiarui Liu and Xiu Li and Xiaoxiao Long and Jiashi Feng and Ping Tan},
-      journal={arXiv preprint arXiv:2412.17808},
-      year={2024},
+@InProceedings{Chen_2025_Dora,
+    author    = {Chen, Rui and Zhang, Jianfeng and Liang, Yixun and Luo, Guan and Li, Weiyu and Liu, Jiarui and Li, Xiu and Long, Xiaoxiao and Feng, Jiashi and Tan, Ping},
+    title     = {Dora: Sampling and Benchmarking for 3D Shape Variational Auto-Encoders},
+    booktitle = {Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)},
+    month     = {June},
+    year      = {2025},
+    pages     = {16251-16261}
 }
 ```
 
