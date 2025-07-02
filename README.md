@@ -1,9 +1,9 @@
  # <p align="center"> <font color=#008000>Dora</font>: Sampling and Benchmarking for 3D Shape Variational Auto-Encoders </p>
 
- <!-- #####  <p align="center"> [Rui Chen](https://aruichen.github.io/), [Jianfeng Zhang*](http://jeff95.me/), [Yixun Liang](https://yixunliang.github.io/), [Guan Luo](https://logan0601.github.io/), [Weiyu Li](https://weiyuli.xyz/), Jiarui Liu</p> -->
+ <!-- #####  <p align="center"> [Rui Chen](https://aruichen.github.io/), [Jianfeng Zhang*](https://jfzhang95.github.io/), [Yixun Liang](https://yixunliang.github.io/), [Guan Luo](https://logan0601.github.io/), [Weiyu Li](https://weiyuli.xyz/), Jiarui Liu</p> -->
 <p align="center">
   <a href="https://aruichen.github.io/">Rui Chen</a><sup>1,2</sup>, 
-  <a href="http://jeff95.me/">Jianfeng Zhang</a><sup>2*</sup>, 
+  <a href="https://jfzhang95.github.io/">Jianfeng Zhang</a><sup>2*</sup>, 
   <a href="https://yixunliang.github.io/">Yixun Liang</a><sup>1</sup>, 
   <a href="https://logan0601.github.io/">Guan Luo</a><sup>2,3</sup>, 
   <a href="https://weiyuli.xyz/">Weiyu Li</a><sup>1</sup>, 
