@@ -304,7 +304,7 @@ class MichelangeloAutoencoder(AutoEncoder):
 
         if self.cfg.pretrained_model_name_or_path != "":
             print(f"Loading pretrained shape model from {self.cfg.pretrained_model_name_or_path}")
-            pretrained_ckpt = torch.load(self.cfg.pretrained_model_name_or_path, map_location="cpu")
+            pretrained_ckpt = torch.load(self.cfg.pretrained_model_name_or_path, map_location="cpu", weights_only=False)
             if 'state_dict' in pretrained_ckpt:
                 _pretrained_ckpt = {}
                 for k, v in pretrained_ckpt['state_dict'].items():

@@ -133,7 +133,7 @@ class ShapeAutoEncoderSystem(BaseSystem):
         device = batch['coarse_surface'].device
         out = self(batch,'val')
         try:
-            save_slice_dir =  self.get_save_path(f"it{self.true_global_step}/{os.path.basename(batch['uid'][0])}.replace(".npz","")") # turn on
+            save_slice_dir =  self.get_save_path(f"it{self.true_global_step}/{os.path.basename(batch['uid'][0]).replace('.npz','')}") # turn on
             # save_slice_dir = ''  # turn off
             mesh_v_f, has_surface = self.shape_model.extract_geometry_by_diffdmc(out["latents"],octree_depth=9, save_slice_dir=save_slice_dir)
             file_path = f"it{self.true_global_step}/{os.path.basename(batch['uid'][0])}".replace(".npz",".obj")
@@ -224,7 +224,7 @@ class ShapeAutoEncoderSystem(BaseSystem):
         device = batch['coarse_surface'].device
         out = self(batch,'val')
         try:
-            save_slice_dir =  self.get_save_path(f"it{self.true_global_step}/{os.path.basename(batch['uid'][0])}.replace(".npz","")") # turn on
+            save_slice_dir =  self.get_save_path(f"it{self.true_global_step}/{os.path.basename(batch['uid'][0]).replace('.npz','')}") # turn on
             # save_slice_dir = ''  # turn off
             mesh_v_f, has_surface = self.shape_model.extract_geometry_by_diffdmc(out["latents"],octree_depth=9, save_slice_dir=save_slice_dir)
             file_path = f"it{self.true_global_step}/{os.path.basename(batch['uid'][0])}".replace(".npz",".obj")
